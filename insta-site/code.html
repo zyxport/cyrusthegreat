@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Source Code — Cyrus Instagram</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0d0b;--surf:#1a1410;--bdr:#3a2e26;--txt:#ede0d0;--muted:#9a8878;--blue:#d97757;--green:#96c98a;--orange:#e8b87a}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,sans-serif;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--surf);border-bottom:1px solid var(--bdr);padding:14px 24px;display:flex;align-items:center;position:sticky;top:0;z-index:10}
+.back-btn{display:flex;align-items:center;gap:7px;color:var(--blue);font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;background:none;border:none;font-family:inherit;padding:0;white-space:nowrap}
+.back-btn svg{width:18px;height:18px;flex-shrink:0}
+.back-btn:hover{opacity:.8}
+.topbar-center{flex:1;text-align:center}
+.topbar-credit{font-size:18px;font-weight:700;color:var(--txt);letter-spacing:-.3px}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.file-chip{display:flex;align-items:center;gap:7px;background:#21262d;border:1px solid var(--bdr);border-radius:6px;padding:5px 12px;font-size:13px;color:var(--muted);white-space:nowrap}
+.file-chip svg{width:15px;height:15px;color:var(--blue)}
+.copy-btn{display:flex;align-items:center;gap:6px;background:#21262d;border:1px solid var(--bdr);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt);cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:#30363d}
+.copy-btn svg{width:15px;height:15px}
+.copy-btn.done{color:var(--green);border-color:var(--green)}
+
+/* ── PAGE ── */
+.page{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+
+/* ── TABS ── */
+.view-tabs{display:flex;gap:0;border-bottom:1px solid var(--bdr);margin-bottom:24px}
+.view-tab{padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:7px}
+.view-tab svg{width:15px;height:15px}
+.view-tab.on{color:var(--txt);border-bottom-color:var(--blue)}
+.view-tab:hover:not(.on){color:var(--txt)}
+
+/* ── CODE SECTION ── */
+.code-box{background:#1a1410;border:1px solid #3a2e26;border-radius:12px;overflow:hidden}
+.code-bar{background:#221a14;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #3a2e26}
+.code-bar-dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot-r{background:#ff5f57}.dot-y{background:#febc2e}.dot-g{background:#28c840}
+.line-count{font-size:12px;color:var(--muted)}
+pre{margin:0;overflow-x:auto;background:#1a1410;padding:22px 26px}
+code{font-size:13.5px;line-height:1.75;font-family:'JetBrains Mono','Fira Code','Cascadia Code','Courier New',monospace;color:#ede0d0;white-space:pre}
+
+/* ── IMAGES SECTION ── */
+.img-sources{display:none}
+.img-sources.on{display:block}
+.code-section{display:none}
+.code-section.on{display:block}
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.src-card{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;transition:border-color .18s}
+.src-card:hover{border-color:#58a6ff55}
+.src-thumb{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#111}
+.src-body{padding:14px 16px}
+.src-filename{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:5px;font-family:'Courier New',monospace}
+.src-credit{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.src-badge{display:inline-flex;align-items:center;gap:5px;background:#21262d;border:1px solid var(--bdr);border-radius:5px;padding:3px 9px;font-size:11px;color:var(--orange);font-weight:600}
+.src-badge svg{width:12px;height:12px}
+.pfp-section{margin-top:32px}
+.pfp-label{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px}
+
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--surf)}
+::-webkit-scrollbar-thumb{background:#30363d;border-radius:3px}
+.loading{text-align:center;padding:60px 20px;color:var(--muted);font-size:15px}
+.error-msg{color:#f85149;text-align:center;padding:40px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back-btn" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to profile
+  </a>
+  <div class="topbar-center">
+    <span class="topbar-credit">Made by Cade &mdash; 2026</span>
+  </div>
+  <div class="topbar-right">
+    <div class="file-chip" id="fileChip" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      index.html
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="view-tabs">
+    <div class="view-tab on" id="tabCode" onclick="switchTab('code')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Source Code
+    </div>
+    <div class="view-tab" id="tabImgs" onclick="switchTab('imgs')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Image Sources
+    </div>
+  </div>
+
+  <!-- SOURCE CODE TAB -->
+  <div class="code-section on" id="codeSection">
+    <div class="code-box">
+      <div class="code-bar">
+        <div class="code-bar-dots">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+        </div>
+        <span class="line-count" id="lineCount"></span>
+      </div>
+      <div id="codeWrap"><div class="loading">Loading source code...</div></div>
+    </div>
+  </div>
+
+  <!-- IMAGE SOURCES TAB -->
+  <div class="img-sources" id="imgSection">
+    <div class="src-grid">
+      <div class="src-card">
+        <img class="src-thumb" src="img/post1.jpg" alt="Post 1" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post1.jpg</div>
+          <div class="src-credit">Oxford Atlas of World History / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+      <div class="src-card">
+        <img class="src-thumb" src="img/post2.jpg" alt="Post 2" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post2.jpg</div>
+          <div class="src-credit">Apadana Palace, Persepolis / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+      <div class="src-card">
+        <img class="src-thumb" src="img/post3.jpg" alt="Post 3" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post3.jpg</div>
+          <div class="src-credit">Persian Daric, c. 420 BC / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+      <div class="src-card">
+        <img class="src-thumb" src="img/post4.jpg" alt="Post 4" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post4.jpg</div>
+          <div class="src-credit">Cyrus Cylinder (539 BC), British Museum / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+      <div class="src-card">
+        <img class="src-thumb" src="img/post5.jpg" alt="Post 5" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post5.jpg</div>
+          <div class="src-credit">Qanat Cross-Section Diagram / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+      <div class="src-card">
+        <img class="src-thumb" src="img/post6.jpg" alt="Post 6" onerror="this.style.background='#1c1c1c'">
+        <div class="src-body">
+          <div class="src-filename">img/post6.jpg</div>
+          <div class="src-credit">Gustave Doré, "The Rebuilding of the Temple" (1866) / Wikimedia Commons</div>
+          <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Wikimedia Commons</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pfp-section">
+      <div class="pfp-label">Profile &amp; Following Images</div>
+      <div class="src-grid">
+        <div class="src-card">
+          <img class="src-thumb" src="img/pfp.png" alt="Profile" onerror="this.style.background='#1c1c1c'" style="aspect-ratio:1;object-fit:cover">
+          <div class="src-body">
+            <div class="src-filename">img/pfp.png</div>
+            <div class="src-credit">Cyrus the Great — profile photo</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Profile image</span>
+          </div>
+        </div>
+        <div class="src-card">
+          <img class="src-thumb" src="img/astyages.jpg" alt="Astyages" onerror="this.style.background='#1c1c1c'">
+          <div class="src-body">
+            <div class="src-filename">img/astyages.jpg</div>
+            <div class="src-credit">Astyages — King of Media (Following list)</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Following image</span>
+          </div>
+        </div>
+        <div class="src-card">
+          <img class="src-thumb" src="img/croesus.jpg" alt="Croesus" onerror="this.style.background='#1c1c1c'">
+          <div class="src-body">
+            <div class="src-filename">img/croesus.jpg</div>
+            <div class="src-credit">Croesus — King of Lydia (Following list)</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Following image</span>
+          </div>
+        </div>
+        <div class="src-card">
+          <img class="src-thumb" src="img/amasis.jpg" alt="Amasis II" onerror="this.style.background='#1c1c1c'">
+          <div class="src-body">
+            <div class="src-filename">img/amasis.jpg</div>
+            <div class="src-credit">Amasis II — Pharaoh of Egypt (Following list)</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Following image</span>
+          </div>
+        </div>
+        <div class="src-card">
+          <img class="src-thumb" src="img/psamtik.jpg" alt="Psamtik III" onerror="this.style.background='#1c1c1c'">
+          <div class="src-body">
+            <div class="src-filename">img/psamtik.jpg</div>
+            <div class="src-credit">Psamtik III — Last native Pharaoh (Following list)</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Following image</span>
+          </div>
+        </div>
+        <div class="src-card">
+          <img class="src-thumb" src="img/solon.jpg" alt="Solon" onerror="this.style.background='#1c1c1c'">
+          <div class="src-body">
+            <div class="src-filename">img/solon.jpg</div>
+            <div class="src-credit">Solon — Lawgiver of Athens (Following list)</div>
+            <span class="src-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Following image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── COLORS ──
+const C={br:'#d97757',nm:'#e8855e',at:'#e8b87a',st:'#96c98a',cm:'#7a6858',dt:'#c8956a',kw:'#c07850',bi:'#e8c070',nu:'#b8d4a8',li:'#d4946a',pr:'#e8a870',cv:'#d4946a'};
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function sp(col,txt,it){return '<span style="color:'+col+(it?';font-style:italic':'')+'">'+ txt +'</span>';}
+
+function colorAttrs(s){
+  let o='',i=0;
+  while(i<s.length){
+    if(s[i]==='"'||s[i]==="'"){const q=s[i];let j=i+1;while(j<s.length&&s[j]!==q)j++;o+=sp(C.st,esc(s.slice(i,j+1)));i=j+1;}
+    else if(/[\w-]/.test(s[i])){let j=i;while(j<s.length&&/[\w-]/.test(s[j]))j++;o+=sp(C.at,esc(s.slice(i,j)));i=j;}
+    else{o+=esc(s[i]);i++;}
+  }return o;
+}
+
+function colorCSS(src){
+  let o='',i=0,depth=0;
+  while(i<src.length){
+    if(src.startsWith('/*',i)){const e=src.indexOf('*/',i+2);const s=e>=0?e+2:src.length;o+=sp(C.cm,esc(src.slice(i,s)),true);i=s;continue;}
+    if(src[i]==='"'||src[i]==="'"){const q=src[i];let j=i+1;while(j<src.length&&src[j]!==q)j++;o+=sp(C.st,esc(src.slice(i,j+1)));i=j+1;continue;}
+    if(src[i]==='{'){depth++;o+=esc(src[i]);i++;continue;}
+    if(src[i]==='}'){depth--;o+=esc(src[i]);i++;continue;}
+    if(/[a-zA-Z_]/.test(src[i])||src[i]==='-'){
+      let j=i;while(j<src.length&&/[\w-]/.test(src[j]))j++;
+      const w=src.slice(i,j);
+      const rest=src.slice(j).replace(/^\s+/,'');
+      if(depth>0&&rest[0]===':'&&rest[1]!==':')o+=sp(C.pr,esc(w));
+      else if(w.startsWith('--'))o+=sp(C.cv,esc(w));
+      else o+=esc(w);
+      i=j;continue;
+    }
+    if(/\d/.test(src[i])||(src[i]==='#'&&/[0-9a-fA-F]/.test(src[i+1]||''))){
+      let j=src[i]==='#'?i+1:i;
+      if(src[i]==='#'){while(j<src.length&&/[0-9a-fA-F]/.test(src[j]))j++;}
+      else{while(j<src.length&&/[\d.]/.test(src[j]))j++;while(j<src.length&&/[a-zA-Z%]/.test(src[j]))j++;}
+      o+=sp(C.nu,esc(src.slice(i,j)));i=j;continue;
+    }
+    o+=esc(src[i]);i++;
+  }return o;
+}
+
+const KW=new Set('const let var function return if else for while do break continue class new this typeof instanceof in of try catch finally throw async await import export default switch case delete void'.split(' '));
+const LIT=new Set(['true','false','null','undefined','NaN','Infinity']);
+const BI=new Set('document window console setTimeout setInterval clearTimeout clearInterval fetch Promise Array Object String Number Boolean Math JSON Date Error Map Set parseInt parseFloat isNaN encodeURIComponent decodeURIComponent'.split(' '));
+
+function colorJS(src){
+  let o='',i=0;
+  while(i<src.length){
+    if(src.startsWith('//',i)){const e=src.indexOf('\n',i);const s=e>=0?e:src.length;o+=sp(C.cm,esc(src.slice(i,s)),true);i=s;continue;}
+    if(src.startsWith('/*',i)){const e=src.indexOf('*/',i+2);const s=e>=0?e+2:src.length;o+=sp(C.cm,esc(src.slice(i,s)),true);i=s;continue;}
+    if(src[i]==='`'){let j=i+1;while(j<src.length&&src[j]!=='`'){if(src[j]==='\\')j++;j++;}o+=sp(C.st,esc(src.slice(i,j+1)));i=j+1;continue;}
+    if(src[i]==='"'||src[i]==="'"){const q=src[i];let j=i+1;while(j<src.length&&src[j]!==q&&src[j]!=='\n'){if(src[j]==='\\')j++;j++;}o+=sp(C.st,esc(src.slice(i,j+1)));i=j+1;continue;}
+    if(/\d/.test(src[i])){let j=i;while(j<src.length&&/[\d.xXa-fA-F]/.test(src[j]))j++;o+=sp(C.nu,esc(src.slice(i,j)));i=j;continue;}
+    if(/[a-zA-Z_$]/.test(src[i])){
+      let j=i;while(j<src.length&&/[\w$]/.test(src[j]))j++;
+      const w=src.slice(i,j);
+      if(LIT.has(w))o+=sp(C.li,esc(w));
+      else if(KW.has(w))o+=sp(C.kw,esc(w));
+      else if(BI.has(w))o+=sp(C.bi,esc(w));
+      else{let k=j;while(k<src.length&&src[k]===' ')k++;o+=(src[k]==='(')?sp(C.bi,esc(w)):esc(w);}
+      i=j;continue;
+    }
+    o+=esc(src[i]);i++;
+  }return o;
+}
+
+function colorizeHTML(src){
+  let o='',i=0;
+  while(i<src.length){
+    if(src.startsWith('<!--',i)){const e=src.indexOf('-->',i+4);const s=e>=0?e+3:src.length;o+=sp(C.cm,esc(src.slice(i,s)),true);i=s;continue;}
+    if(src.slice(i,i+9).toUpperCase()==='<!DOCTYPE'){const e=src.indexOf('>',i);o+=sp(C.dt,esc(src.slice(i,e+1)));i=e+1;continue;}
+    if(src.startsWith('</',i)){const e=src.indexOf('>',i);if(e<0){o+=esc(src[i]);i++;continue;}o+=sp(C.br,'&lt;/')+sp(C.nm,esc(src.slice(i+2,e).trim()))+sp(C.br,'&gt;');i=e+1;continue;}
+    if(src[i]==='<'&&i+1<src.length&&/[a-zA-Z]/.test(src[i+1])){
+      let j=i+1,inQ=false,qc='';
+      while(j<src.length){if(inQ){if(src[j]===qc)inQ=false;}else if(src[j]==='"'||src[j]==="'"){inQ=true;qc=src[j];}else if(src[j]==='>'){break;}j++;}
+      const inner=src.slice(i+1,j);
+      const m=inner.match(/^([\w:-]+)([\s\S]*)$/);
+      if(m){
+        const tl=m[1].toLowerCase();
+        const selfClose=inner.trimEnd().endsWith('/');
+        o+=sp(C.br,'&lt;')+sp(C.nm,esc(m[1]))+colorAttrs(selfClose?m[2].slice(0,-1):m[2])+sp(C.br,selfClose?'/&gt;':'&gt;');
+        i=j+1;
+        if(tl==='style'){const e=src.toLowerCase().indexOf('</style>',i);const css=e>=0?src.slice(i,e):src.slice(i);o+=colorCSS(css);i=e>=0?e:src.length;}
+        else if(tl==='script'){const e=src.toLowerCase().indexOf('</script>',i);const js=e>=0?src.slice(i,e):src.slice(i);o+=colorJS(js);i=e>=0?e:src.length;}
+      }else{o+=esc(src.slice(i,j+1));i=j+1;}
+      continue;
+    }
+    const nx=src.indexOf('<',i+1);o+=esc(nx>=0?src.slice(i,nx):src.slice(i));i=nx>=0?nx:src.length;
+  }
+  return o;
+}
+
+// ── MAIN ──
+let activeTab='code';
+
+fetch('index.html')
+  .then(r=>r.text())
+  .then(text=>{
+    const start=text.indexOf('// ── GROQ CONFIG ──');
+    const end=text.indexOf('// ── CHAT ENGINE ──');
+    if(start!==-1&&end!==-1) text=text.slice(0,start)+'// ── CHAT ENGINE ──'+text.slice(end+'// ── CHAT ENGINE ──'.length);
+    const lines=text.split('\n').length;
+    document.getElementById('lineCount').textContent=lines+' lines';
+    const pre=document.createElement('pre');
+    const code=document.createElement('code');
+    code.innerHTML=colorizeHTML(text);
+    pre.appendChild(code);
+    document.getElementById('codeWrap').innerHTML='';
+    document.getElementById('codeWrap').appendChild(pre);
+  })
+  .catch(()=>{document.getElementById('codeWrap').innerHTML='<div class="error-msg">Could not load source file.</div>';});
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.getElementById('tabCode').classList.toggle('on', tab === 'code');
+  document.getElementById('tabImgs').classList.toggle('on', tab === 'imgs');
+  document.getElementById('codeSection').classList.toggle('on', tab === 'code');
+  document.getElementById('imgSection').classList.toggle('on', tab === 'imgs');
+  document.getElementById('fileChip').style.display = tab === 'code' ? 'flex' : 'none';
+}
+
+</script>
+</body>
+</html>
