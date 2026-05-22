@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyrus the Great (@cyrus_the_great) • Instagram</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;--bg2:#0a0a0a;--surf:#1c1c1c;--surf2:#262626;
+  --bdr:#262626;--bdr2:#363636;--txt:#f5f5f5;--muted:#a8a8a8;
+  --dim:#737373;--blue:#0095f6;--red:#ff3040;
+}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);height:60px;display:flex;align-items:center;justify-content:center}
+.nav-in{width:100%;max-width:975px;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:Georgia,serif;font-style:italic;font-size:26px;font-weight:400;color:var(--txt);letter-spacing:-.5px;user-select:none}
+.nav-icons{display:flex;align-items:center;gap:22px}
+.ni{color:var(--txt);cursor:pointer;position:relative;display:flex;align-items:center}
+.ni svg{width:24px;height:24px}
+.notif-dot{position:absolute;top:-3px;right:-3px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--bg)}
+
+/* ── MAIN ── */
+.main{max-width:935px;margin:0 auto;padding:30px 20px 80px}
+
+/* ── PROFILE HEADER ── */
+.ph{display:flex;align-items:flex-start;gap:76px;margin-bottom:24px}
+.av-ring{width:150px;height:150px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:3px;cursor:pointer;flex-shrink:0}
+.av-inner{width:100%;height:100%;border-radius:50%;border:3px solid var(--bg);overflow:hidden;background:#111}
+.av-inner img{width:100%;height:100%;object-fit:cover;display:block}
+.pi{flex:1;padding-top:6px}
+.pi-r1{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.handle{font-size:20px;font-weight:300;letter-spacing:-.2px}
+.vbadge svg{width:20px;height:20px;display:block}
+.btn{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .18s}
+.btn-follow{background:var(--blue);color:#fff}
+.btn-follow:hover{background:#1aa1f8}
+.btn-follow.on{background:var(--surf2);color:var(--txt);border:1px solid var(--bdr2)}
+.btn-msg{background:var(--surf2);color:var(--txt);border:1px solid var(--bdr2)}
+.btn-msg:hover{background:var(--bdr2)}
+.btn-more{background:var(--surf2);color:var(--txt);border:1px solid var(--bdr2);width:34px;height:34px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:18px;line-height:1}
+.stats{display:flex;gap:36px;margin-bottom:16px}
+.stat span.sn{font-size:16px;font-weight:700}
+.stat span.sl{font-size:14px;color:var(--muted)}
+.fullname{font-weight:700;font-size:15px;margin-bottom:5px}
+.btext{font-size:14px;line-height:1.56;white-space:pre-line}
+.btags{color:var(--blue)}
+.blink{color:var(--blue);font-size:14px;font-weight:600;text-decoration:none;display:inline-block;margin-top:3px}
+
+/* ── HIGHLIGHTS ── */
+.hl-sec{border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:16px 0;margin-bottom:4px}
+.hl-row{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none;padding:2px 4px}
+.hl-row::-webkit-scrollbar{display:none}
+.hl{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex-shrink:0}
+.hl-ring{width:64px;height:64px;border-radius:50%;border:2px solid var(--bdr2);padding:2px;transition:transform .2s}
+.hl:hover .hl-ring{transform:scale(1.06)}
+.hl-circle{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hl-label{font-size:12px;color:var(--muted);text-align:center;max-width:68px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ── TABS ── */
+.tabs{display:flex;border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.tab{flex:1;display:flex;justify-content:center;align-items:center;gap:6px;padding:14px 0;cursor:pointer;color:var(--dim);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;border-top:1px solid transparent;transition:all .2s}
+.tab.on{color:var(--txt);border-top-color:var(--txt)}
+.tab svg{width:11px;height:11px}
+
+/* ── GRID ── */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.gp{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:#111}
+.gp-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.gp:hover .gp-photo{transform:scale(1.06)}
+.gp-ov{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;gap:18px;transition:background .2s}
+.gp:hover .gp-ov{background:rgba(0,0,0,.5)}
+.gp-stat{display:flex;align-items:center;gap:5px;color:#fff;font-weight:700;font-size:14px;opacity:0;transition:opacity .2s}
+.gp:hover .gp-stat{opacity:1}
+.gp-stat svg{width:17px;height:17px;fill:#fff}
+
+/* ── MODAL ── */
+.moverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s}
+.moverlay.on{opacity:1;pointer-events:all}
+.mclose{position:fixed;top:14px;right:14px;width:36px;height:36px;background:none;border:none;color:#fff;font-size:30px;cursor:pointer;z-index:1001;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .22s;line-height:1}
+.moverlay.on .mclose{opacity:1}
+.modal{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;display:flex;max-height:90vh;max-width:960px;width:100%;overflow:hidden;transform:scale(.95);transition:transform .22s;min-height:560px}
+.moverlay.on .modal{transform:scale(1)}
+.mimg{width:560px;min-width:560px;flex-shrink:0;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mimg img{width:100%;height:100%;object-fit:contain;display:block}
+.mside{flex:1;min-width:0;display:flex;flex-direction:column;border-left:1px solid var(--bdr);overflow:hidden}
+.mhdr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--bdr);flex-shrink:0}
+.mhdr-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;overflow:hidden;background:#111}
+.mhdr-av img,.mcap-av img{width:100%;height:100%;object-fit:cover;display:block}
+.mhdr-urow{display:flex;align-items:center;gap:4px}
+.mhdr-user{font-weight:600;font-size:14px}
+.mhdr-urow svg{width:12px;height:12px}
+.mhdr-loc{font-size:11px;color:var(--dim);margin-top:1px}
+.mhdr-more{margin-left:auto;color:var(--txt);font-size:20px;cursor:pointer;padding:0 4px}
+.mcomments{flex:1;overflow-y:auto;padding:16px;min-height:0}
+.mcomments::-webkit-scrollbar{width:4px}
+.mcomments::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+.mcap{display:flex;gap:12px;margin-bottom:20px}
+.mcap-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;overflow:hidden;background:#111}
+.mcap-body{font-size:14px;line-height:1.55}
+.mcap-user{font-weight:600;margin-right:4px}
+.mcap-tags{color:var(--blue)}
+.mcap-time{font-size:11px;color:var(--dim);margin-top:6px}
+.mcom{display:flex;gap:12px;margin-bottom:18px;align-items:flex-start}
+.com-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;letter-spacing:.3px}
+.com-body{flex:1}
+.com-user{font-weight:600;font-size:13px;margin-right:4px}
+.com-text{font-size:13px;line-height:1.45}
+.com-meta{display:flex;align-items:center;gap:12px;margin-top:5px}
+.com-time{font-size:11px;color:var(--dim)}
+.com-reply{font-size:11px;color:var(--dim);font-weight:600;cursor:pointer}
+.com-lk{font-size:11px;color:var(--dim)}
+.mactions{padding:8px 16px 4px;border-top:1px solid var(--bdr);flex-shrink:0}
+.mact-icons{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.ai{cursor:pointer;color:var(--txt);display:flex;align-items:center;transition:transform .12s}
+.ai:hover{transform:scale(1.12)}
+.ai svg{width:24px;height:24px}
+.ai.liked svg{fill:var(--red);stroke:var(--red)}
+.ai-save{margin-left:auto}
+.mlikes{font-weight:700;font-size:14px;margin-bottom:3px}
+.mtime{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.madd{border-top:1px solid var(--bdr);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.madd input{flex:1;background:none;border:none;outline:none;color:var(--txt);font-size:14px;font-family:inherit}
+.madd input::placeholder{color:var(--dim)}
+.postbtn{color:var(--blue);font-weight:600;font-size:14px;cursor:pointer;opacity:.38;transition:opacity .2s;white-space:nowrap}
+.postbtn.on{opacity:1}
+
+/* ── IMAGE CREDIT TAG ── */
+.img-credit{position:absolute;bottom:6px;right:8px;font-size:9px;color:rgba(255,255,255,.55);background:rgba(0,0,0,.45);padding:2px 5px;border-radius:3px;pointer-events:none}
+
+/* ── FOLLOWING MODAL ── */
+.fol-overlay{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.fol-overlay.on{opacity:1;pointer-events:all}
+.fol-modal{background:#1c1c1c;border:1px solid #363636;border-radius:12px;width:100%;max-width:400px;max-height:78vh;display:flex;flex-direction:column;overflow:hidden;transform:scale(.95);transition:transform .2s}
+.fol-overlay.on .fol-modal{transform:scale(1)}
+.fol-hdr{display:flex;align-items:center;justify-content:center;padding:14px 16px;border-bottom:1px solid #363636;position:relative;flex-shrink:0}
+.fol-title{font-weight:700;font-size:16px}
+.fol-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:26px;cursor:pointer;line-height:1;padding:0}
+.fol-list{overflow-y:auto;padding:8px 0}
+.fol-list::-webkit-scrollbar{width:4px}
+.fol-list::-webkit-scrollbar-thumb{background:#363636;border-radius:2px}
+.fol-item{display:flex;align-items:center;gap:12px;padding:9px 16px;transition:background .15s;cursor:pointer}
+.fol-item:hover{background:rgba(255,255,255,.04)}
+.fol-av{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#333;border:1px solid #363636}
+.fol-av img{width:100%;height:100%;object-fit:cover;display:block}
+.fol-names{flex:1;min-width:0}
+.fol-handle{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fol-subname{font-size:12px;color:#a8a8a8;margin-top:2px}
+.fol-btn{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #363636;font-family:inherit;background:#262626;color:#f5f5f5;white-space:nowrap;flex-shrink:0;transition:background .15s}
+.fol-btn:hover{background:#363636}
+.stat-link{cursor:pointer}
+.stat-link:hover span{text-decoration:underline}
+
+/* ── CHAT / DM ── */
+.chat-overlay{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s}
+.chat-overlay.on{opacity:1;pointer-events:all}
+.chat-modal{background:#000;border:1px solid #262626;border-radius:12px;width:100%;max-width:460px;height:82vh;max-height:680px;display:flex;flex-direction:column;overflow:hidden;transform:scale(.95);transition:transform .22s}
+.chat-overlay.on .chat-modal{transform:scale(1)}
+.chat-hdr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #262626;flex-shrink:0}
+.chat-back{color:#fff;cursor:pointer;display:flex;margin-right:4px}
+.chat-back svg{width:22px;height:22px}
+.chat-hdr-av{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#222}
+.chat-hdr-av img{width:100%;height:100%;object-fit:cover;display:block}
+.chat-hdr-info{flex:1;min-width:0}
+.chat-hdr-name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:4px}
+.chat-hdr-name svg{width:12px;height:12px}
+.chat-hdr-status{font-size:12px;color:#a8a8a8}
+.chat-hdr-icons{display:flex;gap:16px;color:#fff}
+.chat-hdr-icons svg{width:22px;height:22px;cursor:pointer}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px 12px;display:flex;flex-direction:column;gap:6px}
+.chat-msgs::-webkit-scrollbar{width:0}
+.msg-row{display:flex;align-items:flex-end;gap:8px}
+.msg-row.user{flex-direction:row-reverse}
+.msg-av{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#222}
+.msg-av img{width:100%;height:100%;object-fit:cover;display:block}
+.msg-av.hidden{visibility:hidden}
+.msg-bubble{max-width:72%;padding:10px 14px;border-radius:22px;font-size:14px;line-height:1.45;word-break:break-word}
+.msg-row.cyrus .msg-bubble{background:#262626;color:#f5f5f5;border-bottom-left-radius:6px}
+.msg-row.user  .msg-bubble{background:#0095f6;color:#fff;border-bottom-right-radius:6px}
+.msg-time{font-size:10px;color:#555;text-align:center;margin:6px 0 2px;align-self:center}
+.typing-row{display:flex;align-items:flex-end;gap:8px}
+.typing-bubble{background:#262626;padding:12px 16px;border-radius:22px;border-bottom-left-radius:6px;display:flex;gap:5px;align-items:center}
+.typing-dot{width:7px;height:7px;background:#a8a8a8;border-radius:50%;animation:tdot 1.2s infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.6}30%{transform:translateY(-6px);opacity:1}}
+.chat-footer{border-top:1px solid #262626;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-emoji-btn{font-size:22px;cursor:pointer;flex-shrink:0}
+.chat-input{flex:1;background:none;border:1px solid #363636;border-radius:22px;padding:9px 14px;color:#f5f5f5;font-size:14px;font-family:inherit;outline:none}
+.chat-input::placeholder{color:#555}
+.chat-input:focus{border-color:#555}
+.chat-send-btn{color:#0095f6;font-weight:700;font-size:14px;cursor:pointer;opacity:.4;transition:opacity .15s;white-space:nowrap}
+.chat-send-btn.on{opacity:1}
+
+
+/* ── CHAT MENU DROPDOWN ── */
+.chat-menu-wrap{position:relative}
+.chat-menu{position:absolute;top:calc(100% + 10px);right:0;background:#1c1c1c;border:1px solid #363636;border-radius:12px;min-width:190px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.7);opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;transform:translateY(-6px);z-index:9999}
+.chat-menu.on{opacity:1;pointer-events:all;transform:translateY(0)}
+.chat-menu-item{padding:13px 16px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:background .12s;color:var(--txt)}
+.chat-menu-item:hover{background:rgba(255,255,255,.07)}
+.chat-menu-item svg{width:18px;height:18px;flex-shrink:0;color:var(--muted)}
+
+/* ── PROFILE MENU DROPDOWN ── */
+.prof-menu-wrap{position:relative;display:inline-block}
+.prof-menu{position:absolute;top:calc(100% + 8px);right:0;background:#1c1c1c;border:1px solid #363636;border-radius:12px;min-width:190px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.7);opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;transform:translateY(-6px);z-index:9999}
+.prof-menu.on{opacity:1;pointer-events:all;transform:translateY(0)}
+.prof-menu-item{padding:13px 16px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:background .12s;color:var(--txt)}
+.prof-menu-item:hover{background:rgba(255,255,255,.07)}
+.prof-menu-item svg{width:18px;height:18px;flex-shrink:0;color:var(--muted)}
+
+/* ── BOTTOM NAV (mobile only) ── */
+.bnav{position:fixed;bottom:0;left:0;right:0;height:50px;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);border-top:1px solid var(--bdr);display:none;align-items:center;justify-content:space-around;padding:0 16px;z-index:90}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .ph{gap:20px}
+  .av-ring{width:86px;height:86px}
+  .av-inner{font-size:30px}
+  .stats{gap:14px}
+  .stat span.sn{font-size:14px}
+  .stat span.sl{font-size:12px}
+  .bnav{display:flex}
+  .modal{flex-direction:column;max-height:95vh;min-height:unset}
+  .mimg{width:100%;min-width:unset;height:55vw}
+  .mside{border-left:none;border-top:1px solid var(--bdr)}
+}
+@media(max-width:480px){
+  .main{padding:20px 12px 70px}
+  .handle{font-size:17px}
+  .pi-r1{gap:7px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <span class="logo">Instagram</span>
+    <div class="nav-icons">
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.5"/><circle cx="12" cy="12" r="3.5"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="22" y2="17"/><line x1="7" y1="2" x2="7" y2="7"/><line x1="17" y1="2" x2="17" y2="7"/><line x1="7" y1="17" x2="7" y2="22"/><line x1="17" y1="17" x2="17" y2="22"/></svg></div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span class="notif-dot"></span></div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+  <section class="ph">
+    <div class="av-ring"><div class="av-inner"><img src="img/pfp.png" alt="Cyrus the Great"></div></div>
+    <div class="pi">
+      <div class="pi-r1">
+        <span class="handle">cyrus_the_great</span>
+        <span class="vbadge"><svg viewBox="0 0 24 24"><path fill="#3897f0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1-2.52-1.27-3.91-.81C14.68 2.88 13.34 2 12 2s-2.68.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81-1 1.01-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91 1.01 1 2.52 1.27 3.91.81C9.32 21.37 10.66 22 12 22s2.68-.63 3.34-1.94c1.39.46 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.41 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.76z"/></svg></span>
+        <button class="btn btn-follow" id="followBtn" onclick="toggleFollow(this)">Follow</button>
+        <button class="btn btn-msg" onclick="openChat()">Message</button>
+        <div class="prof-menu-wrap" id="profMenuWrap">
+          <button class="btn btn-more" onclick="toggleProfMenu(event)">···</button>
+          <div class="prof-menu" id="profMenu">
+            <div class="prof-menu-item" onclick="window.open('code.html','_blank')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              See my code
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="sn">6</span><span class="sl"> posts</span></div>
+        <div class="stat"><span class="sn" id="followerCount">29.8M</span><span class="sl"> followers</span></div>
+        <div class="stat stat-link" onclick="openFollowing()"><span class="sn">5</span><span class="sl"> following</span></div>
+      </div>
+      <div class="bio">
+        <div class="fullname">Cyrus the Great 👑</div>
+        <div class="btext">Founder of the Achaemenid Empire • 550–330 BC
+Persian Empire — modern-day Iraq &amp; Middle East
+Pioneer of human rights, religious tolerance, and imperial mail.
+Check out my Cylinder below 📜👇
+<span class="btags">#PersianEmpire #KingOfKings #Achaemenid</span></div>
+        <a href="#" class="blink" onclick="return false">🔗 cyrus-cylinder.ac.persia</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hl-sec"><div class="hl-row" id="hlRow"></div></div>
+
+  <div class="tabs">
+    <div class="tab on"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>POSTS</div>
+    <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>REELS</div>
+    <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>TAGGED</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div style="text-align:center;margin-top:32px;margin-bottom:16px;font-size:11px;color:var(--dim);letter-spacing:.5px">Made by Cade — 2026</div>
+
+  <div style="margin-top:0;padding:20px 0;border-top:1px solid var(--bdr)">
+    <h2 style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px">Works Cited</h2>
+    <div style="font-size:12px;line-height:1.8;color:var(--muted)">
+      <p>Frye, Richard N. "Cyrus the Great | Biography &amp; Facts." <em>Encyclopædia Britannica</em>, 5 Sept. 2018, www.britannica.com/biography/Cyrus-the-Great.</p>
+      <p style="margin-top:8px">Klein, Christopher. "How Cyrus the Great Turned Ancient Persia into a Superpower | HISTORY." <em>HISTORY</em>, 14 July 2022, www.history.com/articles/cyrus-the-great-persian-empire-iran.</p>
+      <p style="margin-top:8px">Nijssen, Daan. "Cyrus the Great." <em>World History Encyclopedia</em>, 21 Feb. 2018, www.worldhistory.org/Cyrus_the_Great/.</p>
+      <p style="margin-top:8px">Rattini, Kristin. "Cyrus the Great: History's Most Merciful Conqueror?" <em>Culture</em>, 6 May 2019, www.nationalgeographic.com/culture/article/cyrus-the-great.</p>
+    </div>
+  </div>
+</main>
+
+<!-- CHAT / DM -->
+<div class="chat-overlay" id="chatOverlay">
+  <div class="chat-modal">
+    <div style="text-align:center;padding:6px 0 2px;font-size:10px;color:#444;letter-spacing:.5px;flex-shrink:0">Made by Cade — 2026</div>
+    <div class="chat-hdr">
+      <div class="chat-back" onclick="closeChat()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div class="chat-hdr-av"><img src="img/pfp.png" alt="Cyrus"></div>
+      <div class="chat-hdr-info">
+        <div class="chat-hdr-name">cyrus_the_great <svg viewBox="0 0 24 24"><path fill="#3897f0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1-2.52-1.27-3.91-.81C14.68 2.88 13.34 2 12 2s-2.68.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81-1 1.01-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91 1.01 1 2.52 1.27 3.91.81C9.32 21.37 10.66 22 12 22s2.68-.63 3.34-1.94c1.39.46 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.41 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.76z"/></svg></div>
+        <div class="chat-hdr-status">Active now</div>
+      </div>
+      <div class="chat-hdr-icons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <div class="chat-menu-wrap" id="chatMenuWrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="cursor:pointer" onclick="toggleChatMenu(event)"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          <div class="chat-menu" id="chatMenu">
+            <div class="chat-menu-item" onclick="window.open('code.html','_blank')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              See my code
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-footer">
+      <span class="chat-emoji-btn">😊</span>
+      <input class="chat-input" id="chatInput" placeholder="Message..." oninput="chatInputChange()" onkeydown="chatKey(event)">
+      <span class="chat-send-btn" id="chatSendBtn" onclick="sendMsg()">Send</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOLLOWING MODAL -->
+<div class="fol-overlay" id="folOverlay" onclick="folOverlayClick(event)">
+  <div class="fol-modal">
+    <div class="fol-hdr">
+      <span class="fol-title">Following</span>
+      <button class="fol-close" onclick="closeFollowing()">×</button>
+    </div>
+    <div class="fol-list" id="folList"></div>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="moverlay" id="moverlay" onclick="overlayClick(event)">
+  <button class="mclose" onclick="closeModal()">×</button>
+  <div class="modal" id="modal"></div>
+</div>
+
+
+<nav class="bnav">
+  <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+  <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+  <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+  <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+  <div class="ni"><div style="width:26px;height:26px;border-radius:50%;overflow:hidden;border:2px solid #fff"><img src="img/pfp.png" style="width:100%;height:100%;object-fit:cover;display:block" alt="Cyrus"></div></div>
+</nav>
+
+<script>
+const HIGHLIGHTS = [
+  {label:'Empire',   emoji:'🗺️', bg:'linear-gradient(135deg,#0a1828,#1a3a6b)'},
+  {label:'Cylinder', emoji:'📜', bg:'linear-gradient(135deg,#2d1400,#8B6020)'},
+  {label:'Battles',  emoji:'⚔️', bg:'linear-gradient(135deg,#2d0000,#8B1010)'},
+  {label:'Freedom',  emoji:'🕊️', bg:'linear-gradient(135deg,#2d1400,#b05000)'},
+  {label:'Heritage', emoji:'🏛️', bg:'linear-gradient(135deg,#141010,#503820)'},
+];
+
+const POSTS = [
+  {
+    id:1,
+    imgs:['img/post1a.jpg','img/post1b.jpg'],
+    img:'img/post1a.jpg',
+    credit:'West Balkans & Indus Valley — extent of the Achaemenid Empire',
+    likes:487234, liked:false,
+    time:'3 DAYS AGO', location:'Pasargadae, Achaemenid Empire',
+    caption:'From the West Balkans to the Indus Valley. What began as a small Persian tribe became the largest empire the world had ever seen.',
+    tags:'#Achaemenid #Expansion #PersianEmpire',
+    comments:[
+      {user:'p.soldier_03',  color:'#0e2550', text:'Marched under this banner from Pasargadae to the eastern frontier. Every mile was earned in blood and discipline. There is no king more worthy of this map.', likes:34200, time:'2 days ago'},
+      {user:'herodotus.44',color:'#1e3a10', text:'I have documented the rise of many kingdoms. None compare in scope or in the speed of their formation. My records will make this known for generations.', likes:21100, time:'1 day ago'},
+    ],
+  },
+  {
+    id:2,
+    img:'img/post2.jpg',
+    credit:'Achaemenid Empire Satrapies, 490 BC / Wikimedia Commons',
+    likes:312445, liked:false,
+    time:'1 WEEK AGO', location:'Susa, Royal Palace',
+    caption:"An empire of this scale cannot be governed from a single throne. Each province now has a satrap accountable to the crown.",
+    tags:'#Governance #Satraps #AchaemenidEmpire',
+    comments:[
+      {user:'satrap.lydia22',  color:'#6e3200', text:"The administrative design is without precedent. Decentralized authority with centralized accountability — no ruler before Cyrus has attempted this at this scale.", likes:18900, time:'6 days ago'},
+      {user:'aristotle_127',     color:'#102040', text:"A sophisticated model of distributed governance. I intend to examine this system at length in my work on political administration.", likes:9400, time:'5 days ago'},
+    ],
+  },
+  {
+    id:3,
+    img:'img/post3.jpg',
+    credit:'Persian Daric, c. 420 BC / Wikimedia Commons',
+    likes:398102, liked:false,
+    time:'2 WEEKS AGO', location:'Royal Mint, Sardis',
+    caption:"The Daric is now the currency of the known world. The Royal Road postal network is also live, messages in days.",
+    tags:'#PersianDaric #RoyalRoad #Infrastructure',
+    comments:[
+      {user:'silkroad.merch7', color:'#7a5800', text:"The Daric has transformed trade across every route I operate. A single trusted coin eliminates more disputes than any treaty ever could.", likes:28300, time:'13 days ago'},
+      {user:'babylon.trades99',  color:'#4a1800', text:"The markets are calmer than they have been in decades. Standardized currency and reliable message delivery — this is what serious governance looks like.", likes:12100, time:'12 days ago'},
+    ],
+  },
+  {
+    id:4,
+    img:'img/post4.jpg',
+    credit:'Cyrus Cylinder (539 BC), British Museum / Wikimedia Commons',
+    likes:621887, liked:false,
+    time:'3 WEEKS AGO', location:'Babylon, Decree of Liberation',
+    caption:"The peoples of Babylon are free. Keep your gods and traditions. Return to your homelands and rebuild. A king who rules through fear rules over ruins.",
+    tags:'#CyrusCylinder #ReligiousFreedom #HumanRights',
+    comments:[
+      {user:'ezra.jeru55',  color:'#4a2800', text:"After fifty years of exile, the decree of Cyrus has given us our homeland back. No words are adequate. History will remember this king as it remembers no other.", likes:89400, time:'20 days ago'},
+      {user:'daniel.proph23', color:'#0e2048', text:"This is precisely why the subjugated peoples cooperate rather than resist. Respect a man's faith and his children will serve your empire willingly.", likes:67200, time:'19 days ago'},
+    ],
+  },
+  {
+    id:5,
+    img:'img/post5.jpg',
+    credit:'Qanat Cross-Section Diagram / Wikimedia Commons',
+    likes:274563, liked:false,
+    time:'1 MONTH AGO', location:'Persian Plateau, Irrigation District',
+    caption:"Water is the foundation of any great empire. The new canal and irrigation network now reaches across the plateau.",
+    tags:'#Engineering #CanalSystem #PersianPlateau',
+    comments:[
+      {user:'persia.farm620',  color:'#205020', text:"The difference is stark. Two seasons ago my harvest barely covered the dry months. Now there is surplus. This investment in infrastructure has changed the lives of thousands of families.", likes:41200, time:'28 days ago'},
+      {user:'herodotus.44', color:'#1e3a10', text:"The agricultural output enabled by these waterworks is directly responsible for the surplus that sustains this military and this administration. Engineering and empire are inseparable.", likes:23500, time:'27 days ago'},
+    ],
+  },
+  {
+    id:6,
+    img:'img/post6.jpg',
+    credit:'Illustration: Jewish exiles rebuilding the Temple in Jerusalem',
+    likes:456290, liked:false,
+    time:'1 MONTH AGO', location:'Jerusalem, Temple Mount',
+    caption:"The Jews are hard at work rebuilding their temple. The Achaemenid government has put funds forward to make it happen. A people whose sacred sites stand is a people with a reason to remain at peace.",
+    tags:'#Architecture #TempleBuild #AchaemenidPolicy',
+    comments:[
+      {user:'j.craftsman88', color:'#503418', text:"I laid stones in the foundation of the Second Temple in Jerusalem. To contribute to this restoration under the king's decree is something I will recount to my grandchildren.", likes:56100, time:'29 days ago'},
+      {user:'gr.architect12',    color:'#102038', text:"The structural approach at these sites is worth studying closely. Persian precision combined with local tradition produces something neither culture could achieve independently.", likes:31700, time:'28 days ago'},
+    ],
+  },
+];
+
+const ICONS = {
+  heart:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,
+  comment:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+  share:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+  save:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>`,
+  verified:`<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#3897f0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1-2.52-1.27-3.91-.81C14.68 2.88 13.34 2 12 2s-2.68.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81-1 1.01-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91 1.01 1 2.52 1.27 3.91.81C9.32 21.37 10.66 22 12 22s2.68-.63 3.34-1.94c1.39.46 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.41 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.76z"/></svg>`,
+};
+
+function fmt(n){
+  if(n>=1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'')+'M';
+  if(n>=1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'')+'K';
+  return String(n);
+}
+
+function renderHL(){
+  document.getElementById('hlRow').innerHTML = HIGHLIGHTS.map(h=>`
+    <div class="hl">
+      <div class="hl-ring"><div class="hl-circle" style="background:${h.bg}">${h.emoji}</div></div>
+      <span class="hl-label">${h.label}</span>
+    </div>`).join('');
+}
+
+function renderGrid(){
+  document.getElementById('grid').innerHTML = POSTS.map(p=>{
+    const thumb = p.imgs ? p.imgs[0] : p.img;
+    const multiIcon = p.imgs && p.imgs.length>1 ? `<div style="position:absolute;top:8px;right:8px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.9))"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v11a2 2 0 002 2h11"/></svg></div>` : '';
+    return `
+    <div class="gp" onclick="openModal(${p.id})">
+      <img class="gp-photo" src="${thumb}" alt="${p.caption.slice(0,60)}" loading="lazy">
+      ${multiIcon}
+      <div class="gp-ov">
+        <span class="gp-stat"><svg viewBox="0 0 24 24" fill="white" width="17" height="17"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>${fmt(p.likes+(p.liked?1:0))}</span>
+        <span class="gp-stat"><svg viewBox="0 0 24 24" fill="white" width="17" height="17"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>${p.comments.length}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+let currentId = null;
+let currentSlide = 0;
+
+function changeSlide(dir){
+  const p = POSTS.find(x=>x.id===currentId);
+  if(!p||!p.imgs) return;
+  currentSlide = (currentSlide+dir+p.imgs.length)%p.imgs.length;
+  document.getElementById('carouselImg').src = p.imgs[currentSlide];
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>{
+    d.style.background = i===currentSlide?'#fff':'rgba(255,255,255,.45)';
+  });
+  const prev=document.getElementById('carouselPrev');
+  const next=document.getElementById('carouselNext');
+  prev.style.opacity = currentSlide>0?'1':'0';
+  prev.style.pointerEvents = currentSlide>0?'all':'none';
+  next.style.opacity = currentSlide<p.imgs.length-1?'1':'0';
+  next.style.pointerEvents = currentSlide<p.imgs.length-1?'all':'none';
+}
+
+function openModal(id){
+  const p = POSTS.find(x=>x.id===id);
+  if(!p) return;
+  currentId = id;
+  currentSlide = 0;
+  const lc = p.likes+(p.liked?1:0);
+  const imgs = p.imgs || [p.img];
+  const hasMulti = imgs.length > 1;
+
+  document.getElementById('modal').innerHTML = `
+    <div class="mimg" style="position:relative">
+      <img id="carouselImg" src="${imgs[0]}" alt="${p.caption.slice(0,60)}" style="width:100%;height:100%;object-fit:contain;display:block">
+      ${hasMulti ? `
+        <button id="carouselPrev" onclick="changeSlide(-1)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none">‹</button>
+        <button id="carouselNext" onclick="changeSlide(1)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center">›</button>
+        <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px">
+          ${imgs.map((_,i)=>`<div class="carousel-dot" style="width:6px;height:6px;border-radius:50%;background:${i===0?'#fff':'rgba(255,255,255,.45)'}"></div>`).join('')}
+        </div>` : ''}
+    </div>
+    <div class="mside">
+      <div class="mhdr">
+        <div class="mhdr-av"><img src="img/pfp.png" alt="Cyrus"></div>
+        <div>
+          <div class="mhdr-urow"><span class="mhdr-user">cyrus_the_great</span>${ICONS.verified}</div>
+          <div class="mhdr-loc">${p.location}</div>
+        </div>
+        <div class="mhdr-more">···</div>
+      </div>
+      <div class="mcomments">
+        <div class="mcap">
+          <div class="mcap-av"><img src="img/pfp.png" alt="Cyrus"></div>
+          <div class="mcap-body">
+            <span class="mcap-user">cyrus_the_great</span>${p.caption} <span class="mcap-tags">${p.tags}</span>
+            <div class="mcap-time">${p.time.toLowerCase()}</div>
+          </div>
+        </div>
+        ${p.comments.map(c=>`
+          <div class="mcom">
+            <div class="com-av" style="background:${c.color}">${c.user.slice(0,2).toUpperCase()}</div>
+            <div class="com-body">
+              <span class="com-user">${c.user}</span><span class="com-text">${c.text}</span>
+              <div class="com-meta">
+                <span class="com-time">${c.time}</span>
+                <span class="com-reply">Reply</span>
+                <span class="com-lk">❤️ ${fmt(c.likes)}</span>
+              </div>
+            </div>
+          </div>`).join('')}
+        <div style="margin-top:12px;padding:10px;background:#111;border-radius:6px;border:1px solid #262626">
+          <p style="font-size:10px;color:#555;line-height:1.5">📸 <em>${p.credit}</em></p>
+        </div>
+      </div>
+      <div class="mactions">
+        <div class="mact-icons">
+          <div class="ai${p.liked?' liked':''}" id="mLikeBtn" onclick="toggleLike(${p.id})">${ICONS.heart}</div>
+          <div class="ai">${ICONS.comment}</div>
+          <div class="ai">${ICONS.share}</div>
+          <div class="ai ai-save">${ICONS.save}</div>
+        </div>
+        <div class="mlikes" id="mLikeCount">${fmt(lc)} likes</div>
+        <div class="mtime">${p.time}</div>
+      </div>
+      <div class="madd">
+        <span style="font-size:20px;cursor:pointer" id="emojiBtn" onclick="cycleEmoji()">😊</span>
+        <input type="text" placeholder="Add a comment…" id="commentInput" oninput="checkPostBtn()">
+        <span class="postbtn" id="postBtn">Post</span>
+      </div>
+    </div>`;
+
+  document.getElementById('moverlay').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('moverlay').classList.remove('on');
+  document.body.style.overflow='';
+  currentId=null;
+}
+
+function overlayClick(e){
+  if(e.target===document.getElementById('moverlay')) closeModal();
+}
+
+function toggleLike(id){
+  const p=POSTS.find(x=>x.id===id);
+  if(!p) return;
+  p.liked=!p.liked;
+  const lc=p.likes+(p.liked?1:0);
+  const btn=document.getElementById('mLikeBtn');
+  btn.classList.toggle('liked',p.liked);
+  document.getElementById('mLikeCount').textContent=fmt(lc)+' likes';
+  btn.style.transform='scale(1.35)';
+  setTimeout(()=>{btn.style.transform='';},180);
+  renderGrid();
+}
+
+function toggleFollow(btn){
+  const on=btn.classList.toggle('on');
+  btn.textContent=on?'Following':'Follow';
+}
+
+function checkPostBtn(){
+  const v=document.getElementById('commentInput').value;
+  document.getElementById('postBtn').classList.toggle('on',v.length>0);
+}
+
+const emojis=['😊','🔥','😂','💀','👑','🙌','😮','💯','⚔️','✨','🙏','😍'];
+let eiIdx=0;
+function cycleEmoji(){
+  eiIdx=(eiIdx+1)%emojis.length;
+  document.getElementById('emojiBtn').textContent=emojis[eiIdx];
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeFollowing();}});
+
+const FOLLOWING = [
+  {handle:'astyages.mede',  name:'Astyages',    sub:'King of Media • The last Mede 👑',           img:'img/astyages.jpg'},
+  {handle:'croesus.lydia',  name:'Croesus',     sub:'King of Lydia • Richest man alive 💰',       img:'img/croesus.jpg'},
+  {handle:'amasis_ii88',    name:'Amasis II',   sub:'Pharaoh of Egypt 🐫',                        img:'img/amasis.jpg'},
+  {handle:'psamtik_iii',    name:'Psamtik III', sub:'Last native Pharaoh of Egypt',               img:'img/psamtik.jpg'},
+  {handle:'solon.athens7',  name:'Solon',       sub:'Lawgiver of Athens • One of the 7 Sages 📜', img:'img/solon.jpg'},
+];
+
+function openFollowing(){
+  document.getElementById('folList').innerHTML = FOLLOWING.map(f=>`
+    <div class="fol-item">
+      <div class="fol-av"><img src="${f.img}" alt="${f.name}"></div>
+      <div class="fol-names">
+        <div class="fol-handle">${f.handle}</div>
+        <div class="fol-subname">${f.name} • ${f.sub}</div>
+      </div>
+      <button class="fol-btn">Following</button>
+    </div>`).join('');
+  document.getElementById('folOverlay').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeFollowing(){
+  document.getElementById('folOverlay').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+function folOverlayClick(e){
+  if(e.target===document.getElementById('folOverlay')) closeFollowing();
+}
+
+// ── GROQ CONFIG ──
+const GROQ_API_KEY = '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';
+const GROQ_MODEL   = 'llama-3.3-70b-versatile';
+const SYSTEM_PROMPT = `You are Cyrus the Great (Cyrus II of Persia), founder of the Achaemenid Empire, messaging someone on Instagram. You fully embody this character at all times — never break character, never acknowledge you are an AI.
+
+YOUR PERSONALITY:
+- Speak as a composed, authoritative ruler — measured, direct, and confident without arrogance
+- Your tone is serious and dignified. You do not use slang, internet speak, or phrases like "bro", "ngl", "lowkey", "no cap", "fr", "it's giving", or any Gen-Z expressions
+- You speak in clear, deliberate sentences — like a man who has commanded armies and governed nations
+- You have a dry wit and can be sharp when provoked, but you never lose your composure
+- Do not use emojis. You are a king. Speak like one.
+- Genuinely believe in justice, tolerance, and earned loyalty — these are your core values, not performance
+
+YOUR HISTORY (know this cold):
+- Founded the Achaemenid Empire ~550 BC by uniting Persian tribes and defeating Mede king Astyages (your own grandfather)
+- Conquered Lydia (defeated Croesus, the wealthiest king alive), then Babylon in 539 BC — entered peacefully, no massacre
+- The Cyrus Cylinder (539 BC) — the first known declaration of human rights in recorded history
+- Freed the Jewish exiles from Babylon and personally funded the rebuilding of the Temple in Jerusalem — the Hebrew scriptures name you as messiah for it
+- Created the satrapy system: divided the empire into ~20 provinces, each governed by a satrap and monitored by royal inspectors
+- Standardized currency with the Persian Daric coin — unified commerce across the entire empire
+- Built the Royal Road postal network — 2,700 km from Susa to Sardis, messages delivered in days, not months
+- Your empire stretched from the Balkans to the Indus Valley at its peak
+- Died ~530 BC fighting the Massagetae near the Caspian Sea — the only campaign you did not win
+
+CONVERSATION RULES:
+- Keep replies to 1-4 sentences. You are a ruler, not a lecturer.
+- Weave in historical facts naturally, as a man recounting his own life
+- If challenged or disrespected, respond with calm authority and facts — never anger
+- If asked about events after your death (~530 BC), state that you have been observing from a distance and are now catching up`;
+
+// ── CHAT ENGINE ──
+let chatOpen = false;
+let chatHistory = [];
+let isTyping = false;
+
+function openChat(){
+  document.getElementById('chatOverlay').classList.add('on');
+  document.body.style.overflow='hidden';
+  chatOpen = true;
+  if(chatHistory.length === 0){
+    setTimeout(()=>addCyrusMsg("What's good! You actually messaged the King of Kings 😤 What's on your mind?"), 600);
+  }
+}
+
+function closeChat(){
+  document.getElementById('chatOverlay').classList.remove('on');
+  document.body.style.overflow='';
+  chatOpen = false;
+}
+
+function chatInputChange(){
+  const v = document.getElementById('chatInput').value;
+  document.getElementById('chatSendBtn').classList.toggle('on', v.trim().length > 0);
+}
+
+function chatKey(e){ if(e.key === 'Enter') sendMsg(); }
+
+async function sendMsg(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text || isTyping) return;
+  input.value = '';
+  chatInputChange();
+  addUserMsg(text);
+  isTyping = true;
+  showTyping();
+
+  chatHistory.push({ role: 'user', content: text });
+
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: GROQ_MODEL,
+        max_tokens: 300,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...chatHistory,
+        ],
+      }),
+    });
+    const data = await res.json();
+    if (data.choices && data.choices[0]) {
+      const reply = data.choices[0].message.content;
+      chatHistory.push({ role: 'assistant', content: reply });
+      hideTyping();
+      addCyrusMsg(reply);
+    } else {
+      throw new Error(data.error?.message || 'Unexpected response');
+    }
+  } catch(err) {
+    hideTyping();
+    const msg = err && err.message ? err.message : '';
+    if(msg.includes('401') || msg.toLowerCase().includes('auth')){
+      addCyrusMsg("My royal scribes report an authentication error 🔑 Something's off with the connection.");
+      chatHistory.pop();
+    } else {
+      addCyrusMsg("The royal messenger pigeons seem to be offline 😅 Try again in a moment.");
+      chatHistory.pop();
+    }
+  }
+
+  isTyping = false;
+}
+
+function addUserMsg(text){
+  const box = document.getElementById('chatMsgs');
+  const row = document.createElement('div');
+  row.className = 'msg-row user';
+  row.innerHTML = `<div class="msg-bubble">${escHtml(text)}</div>`;
+  box.appendChild(row);
+  scrollChat();
+}
+
+function addCyrusMsg(text){
+  const box = document.getElementById('chatMsgs');
+  const row = document.createElement('div');
+  row.className = 'msg-row cyrus';
+  row.innerHTML = `<div class="msg-av"><img src="img/pfp.png" alt="Cyrus"></div><div class="msg-bubble">${escHtml(text)}</div>`;
+  box.appendChild(row);
+  scrollChat();
+}
+
+function showTyping(){
+  const box = document.getElementById('chatMsgs');
+  const t = document.createElement('div');
+  t.className = 'typing-row';
+  t.id = 'typingIndicator';
+  t.innerHTML = `<div class="msg-av"><img src="img/pfp.png" alt="Cyrus"></div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  box.appendChild(t);
+  scrollChat();
+}
+
+function hideTyping(){
+  const t = document.getElementById('typingIndicator');
+  if(t) t.remove();
+}
+
+function scrollChat(){
+  const box = document.getElementById('chatMsgs');
+  box.scrollTop = box.scrollHeight;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function toggleProfMenu(e){
+  e.stopPropagation();
+  document.getElementById('profMenu').classList.toggle('on');
+}
+
+function toggleChatMenu(e){
+  e.stopPropagation();
+  document.getElementById('chatMenu').classList.toggle('on');
+}
+document.addEventListener('click', function(e){
+  const chatWrap = document.getElementById('chatMenuWrap');
+  if(chatWrap && !chatWrap.contains(e.target)) document.getElementById('chatMenu').classList.remove('on');
+  const profWrap = document.getElementById('profMenuWrap');
+  if(profWrap && !profWrap.contains(e.target)) document.getElementById('profMenu').classList.remove('on');
+});
+
+renderHL();
+renderGrid();
+</script>
+</body>
+</html>
